@@ -5,6 +5,9 @@ import axios from "axios";
 
 export default function UserBox() {
   const [contact, setContact] = useState([]);
+  const [q, setQ] = useState("");
+
+  const [searchParam] = useState(["name", "phone"]);
 
   useEffect(() => {
     axios.get("http://localhost:3001/api/phonebooks").then((response) => {
@@ -79,14 +82,48 @@ export default function UserBox() {
       });
   };
 
+  const sortTypes = {
+    up: {
+      class: "fa-arrow-down-a-z",
+      fn: (a, b) => a.name.localeCompare(b.name),
+    },
+    down: {
+      class: "fa-arrow-up-z-a",
+      fn: (a, b) => b.name.localeCompare(a.name),
+    },
+  };
+
+  const [currenSort, setCurrentSort] = useState("up");
+
+  const onSortChange = () => {
+    let nexSort;
+
+    if (currenSort === "down") nexSort = "up";
+    else if (currenSort === "up") nexSort = "down";
+
+    setCurrentSort(nexSort);
+  };
+
   return (
     <div className="all">
-      <UserForm add={addContact} />
+      <UserForm
+        add={addContact}
+        q={q}
+        setQ={setQ}
+        sortTypes={sortTypes}
+        currenSort={currenSort}
+        onSortChange={onSortChange}
+      />
       <UserList
         listPhone={contact}
         remove={deleteContact}
         update={updateContact}
         updateAvatar={updateAvatar}
+        q={q}
+        setQ={setQ}
+        searchParam={searchParam}
+        sortTypes={sortTypes}
+        currenSort={currenSort}
       />
     </div>
   );

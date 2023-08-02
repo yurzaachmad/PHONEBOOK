@@ -13,7 +13,6 @@ export default function UserItem({
   const [name, setName] = useState(student.name);
   const [phone, setPhone] = useState(student.phone);
   const [avatar, setAvatar] = useState(student.avatar);
-  const [preview, setPreview] = useState();
 
   const submit = () => {
     confirmAlert({

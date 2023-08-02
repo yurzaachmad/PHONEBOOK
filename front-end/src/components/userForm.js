@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// views for add contact
+
 const AddContact = ({ submit, user, setUser, clik }) => (
   <div className="input-group mb-8" id="search">
     <form className="formAdd" onSubmit={submit}>
@@ -53,10 +55,22 @@ const AddContact = ({ submit, user, setUser, clik }) => (
   </div>
 );
 
-const ListContact = ({ onClick }) => (
+//views for search contact and sorting
+
+const SearchContact = ({
+  onClick,
+  q,
+  setQ,
+  sort,
+  order,
+  ordered,
+  sortTypes,
+  currenSort,
+  onSortChange,
+}) => (
   <div className="input-group mb-8" id="search">
-    <div id="icon">
-      <i className="fa-solid fa-arrow-up-a-z" id="center"></i>
+    <div id="icon" onClick={onSortChange}>
+      <i className={`fa-solid ${sortTypes[currenSort].class}`}></i>
     </div>
     <div className="input-container">
       <i className="fa-solid fa-magnifying-glass" id="input-icon"></i>
@@ -65,6 +79,10 @@ const ListContact = ({ onClick }) => (
         className="form-control"
         aria-describedby="basic-addon1"
         id="input-field"
+        value={q}
+        onChange={(e) => {
+          setQ(e.target.value);
+        }}
       />
     </div>
     <div id="icon">
@@ -73,7 +91,14 @@ const ListContact = ({ onClick }) => (
   </div>
 );
 
-export default function UserForm({ add }) {
+export default function UserForm({
+  add,
+  q,
+  setQ,
+  sortTypes,
+  currenSort,
+  onSortChange,
+}) {
   const [user, setUser] = useState({ name: "", phone: "" });
 
   const submit = (event) => {
@@ -83,6 +108,7 @@ export default function UserForm({ add }) {
     clik();
   };
 
+  // this code is for showing form to add contact
   const [plus, setPlus] = useState(false);
   const onClick = () => setPlus(true);
   const clik = () => setPlus(false);
@@ -92,7 +118,14 @@ export default function UserForm({ add }) {
       {plus ? (
         <AddContact user={user} setUser={setUser} clik={clik} submit={submit} />
       ) : (
-        <ListContact onClick={onClick} />
+        <SearchContact
+          onClick={onClick}
+          q={q}
+          setQ={setQ}
+          onSortChange={onSortChange}
+          currenSort={currenSort}
+          sortTypes={sortTypes}
+        />
       )}
     </div>
   );
