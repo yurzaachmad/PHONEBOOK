@@ -82,6 +82,7 @@ export default function UserBox() {
       });
   };
 
+  //this is state to sort asc and desc
   const sortTypes = {
     up: {
       class: "fa-arrow-down-a-z",

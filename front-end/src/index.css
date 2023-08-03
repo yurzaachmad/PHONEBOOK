@@ -11,6 +11,7 @@ i + i {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  position: fixed;
 }
 
 #icon {
@@ -40,9 +41,11 @@ i + i {
   height: 40px;
   width: 79vw;
   flex-direction: row;
+  border: 2px solid black;
 }
 
 #main {
+  padding-top: 100px;
   padding-left: 200px;
   justify-content: center;
 }
@@ -116,6 +119,24 @@ p {
   }
 }
 
+@media screen and (max-width: 1019px) {
+  #search {
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+  }
+  #input-field {
+    padding-left: 30px;
+    height: 40px;
+    width: 750px;
+    flex-direction: row;
+  }
+  #main {
+    padding-left: 80px;
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   #search {
     padding: 40px;
@@ -143,7 +164,7 @@ p {
   #input-field {
     padding-left: 30px;
     height: 40px;
-    width: 450px;
+    width: 440px;
     flex-direction: row;
   }
   #main {
